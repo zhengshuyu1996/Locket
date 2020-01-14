@@ -35,7 +35,7 @@ def load_data(dirpath, batch_size=1, is_testing=False, w=128, h=128):
 def load_batch(dir_A, dir_B, batch_size=1, is_testing=False, w=128, h=128):
     path_A = glob(dir_A+'*')
     path_B = glob(dir_B+'*')
-    print(len(path_A), len(path_B))
+    print("A_len: %d, B_len: %d"%(len(path_A), len(path_B)))
 
     n_batches = int(min(len(path_A), len(path_B)) / batch_size)
     total_samples = n_batches * batch_size

@@ -171,9 +171,7 @@ class CycleGAN():
 
         print('Start training...')
         for epoch in range(epochs):
-            print('Epoch', epoch)
             for batch_i, (imgs_A, imgs_B) in enumerate(AB_train):
-                print('Batch', batch_i, 'imgLen', len(imgs_A))
                 # ----------------------
                 #  Train Discriminators
                 # ----------------------
@@ -262,3 +260,4 @@ if __name__ == '__main__':
     AB_train = load_batch(dir_A, dir_B, batch_size=1)
     AB_val = load_batch(dir_A, dir_B, batch_size=1, is_testing=True)
     gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
+
