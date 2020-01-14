@@ -59,8 +59,8 @@ class DataLoader():
                 img_A = imread(img_A)
                 img_B = imread(img_B)
 
-                img_A = scipy.misc.imresize(img_A, (w,h))
-                img_B = scipy.misc.imresize(img_B, (w,h))
+                img_A = scipy.misc.imresize(img_A, self.img_res)
+                img_B = scipy.misc.imresize(img_B, self.img_res)
 
                 if not self.is_testing and np.random.random() > 0.5:
                         img_A = np.fliplr(img_A)

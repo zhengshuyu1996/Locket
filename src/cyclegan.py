@@ -223,7 +223,7 @@ class CycleGAN():
         os.makedirs('images/', exist_ok=True)
         r, c = 2, 3
 
-        imgs_A, imgs_B = AB_val.get_batch(batch_size=1)
+        imgs_A, imgs_B = next(AB_val.get_batch(batch_size=1))
 
         # Translate images to the other domain
         fake_B = self.g_AB.predict(imgs_A)
@@ -254,8 +254,8 @@ if __name__ == '__main__':
     config = Config()
     gan = CycleGAN(config)
     # Configure data loader
-    dir_A = '../datasets/matting_samples/matting/'
-    dir_B = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/'
+    dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/'
+    dir_B = '../datasets/matting_samples/matting/'
     AB_train = DataLoader(dir_A, dir_B)
     AB_val = DataLoader(dir_A, dir_B, is_testing=True)
     gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
