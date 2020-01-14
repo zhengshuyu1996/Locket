@@ -303,7 +303,7 @@ if __name__ == '__main__':
     A_sample = AB_val.get_dataset_A(sample_num)
     B_sample = AB_val.get_dataset_B(sample_num)
 
-    gan.train(AB_train=AB_train, AB_val=[A_sample, B_sample], epochs=200, batch_size=8, sample_interval=200)
+    gan.train(AB_train=AB_train, AB_val=(A_sample, B_sample), epochs=200, batch_size=8, sample_interval=200)
     gan.save_models('../models/')
 
 
