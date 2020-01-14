@@ -255,7 +255,8 @@ class CycleGAN():
         os.makedirs('images/', exist_ok=True)
         r, c = 2, 3
 
-        imgs_A, imgs_B = next(AB_val.get_batch(batch_size=1))
+        imgs_A, imgs_B = AB_val
+        # imgs_A, imgs_B = next(AB_val.get_batch(batch_size=1))
 
         # Translate images to the other domain
         fake_B = self.g_AB.predict(imgs_A)
@@ -264,22 +265,23 @@ class CycleGAN():
         reconstr_A = self.g_BA.predict(fake_B)
         reconstr_B = self.g_AB.predict(fake_A)
 
-        gen_imgs = np.concatenate([imgs_A, fake_B, reconstr_A, imgs_B, fake_A, reconstr_B])
+        gen_imgs = np.concatenate([imgs_A, fake_B, reconstr_A, imgs_B, fake_A, reconstr_B], axis=1)
 
         # Rescale images 0 - 1
         gen_imgs = 0.5 * gen_imgs + 0.5
 
         titles = ['Original', 'Translated', 'Reconstructed']
-        fig, axs = plt.subplots(r, c)
         cnt = 0
-        for i in range(r):
-            for j in range(c):
-                axs[i,j].imshow(gen_imgs[cnt])
-                axs[i, j].set_title(titles[j])
-                axs[i,j].axis('off')
-                cnt += 1
-        fig.savefig("images/%d_%d.png" % (epoch, batch_i))
-        plt.close()
+        for k in range(len(imgs_A)):
+            fig, axs = plt.subplots(r, c)
+            for i in range(r):
+                for j in range(c):
+                    axs[i,j].imshow(gen_imgs[cnt])
+                    axs[i,j].set_title(titles[j])
+                    axs[i,j].axis('off')
+                    cnt += 1
+            fig.savefig("images/%d_%d_%d.png" % (epoch, batch_i, k))
+            plt.close()
 
     def save_models(self, save_path):
         save_model(self.g_AB, save_path+'g_AB')
@@ -297,8 +299,11 @@ if __name__ == '__main__':
     dir_B = '../datasets/matting_samples/clip/'
     AB_train = DataLoader(dir_A, dir_B, img_res=(256,256))
     AB_val = DataLoader(dir_A, dir_B, is_testing=True, img_res=(256,256))
-    
-    gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=8, sample_interval=200)
+    sample_num = 10
+    A_sample = AB_val.get_dataset_A(sample_num)
+    B_sample = AB_val.get_dataset_B(sample_num)
+
+    gan.train(AB_train=AB_train, AB_val=[A_sample, B_sample], epochs=200, batch_size=8, sample_interval=200)
     gan.save_models('../models/')
 
 
