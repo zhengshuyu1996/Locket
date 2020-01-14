@@ -105,7 +105,8 @@ class CycleGAN():
             """Layers used during downsampling"""
             d = Conv2D(filters, kernel_size=f_size, strides=2, padding='same')(layer_input)
             d = LeakyReLU(alpha=0.2)(d)
-            d = InstanceNormalization()(d)
+            # d = InstanceNormalization()(d)
+            d = BatchNormalization()(d)
             return d
 
         def deconv2d(layer_input, skip_input, filters, f_size=4, dropout_rate=0):
@@ -114,7 +115,8 @@ class CycleGAN():
             u = Conv2D(filters, kernel_size=f_size, strides=1, padding='same', activation='relu')(u)
             if dropout_rate:
                 u = Dropout(dropout_rate)(u)
-            u = InstanceNormalization()(u)
+            # u = InstanceNormalization()(u)
+            u = BatchNormalization()(u)
             u = Concatenate()([u, skip_input])
             return u
 
@@ -144,7 +146,8 @@ class CycleGAN():
             d = Conv2D(filters, kernel_size=f_size, strides=2, padding='same')(layer_input)
             d = LeakyReLU(alpha=0.2)(d)
             if normalization:
-                d = InstanceNormalization()(d)
+                # d = InstanceNormalization()(d)
+                d = BatchNormalization()(d)
             return d
 
         img = Input(shape=self.img_shape)
