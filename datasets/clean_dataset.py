@@ -28,6 +28,8 @@ def clean_data(data_dir):
     
 dirs = os.listdir('art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/')
 for i in dirs:
+    if i.find('.') >= 0:
+        continue
     clean_data('art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/'+i)
 
 # path = 'matting_samples/matting/1803151818-00000101.png'
