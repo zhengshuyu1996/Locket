@@ -1,2 +1,6 @@
 .DS_Store
 datasets/*/*
+datasets/*/*/*
+datasets/*/*/*/*
+datasets/*/*/*/*/*
+datasets/*/*/*/*/*/*
