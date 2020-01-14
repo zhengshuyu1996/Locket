@@ -26,4 +26,8 @@ def clean_data(data_dir):
         os.remove('{}/{}'.format(data_dir, del_file))
     
     
-clean_data('art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings')
+# clean_data('art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings')
+# path = 'matting_samples/matting/1803151818-00000101.png'
+path = 'art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/images.jpeg'
+img = scipy.misc.imread(path, mode='RGBA').astype(np.float)
+print(img)
