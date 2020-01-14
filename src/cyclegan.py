@@ -1,18 +1,16 @@
 from __future__ import print_function, division
 import scipy
 
-from keras.datasets import mnist
 from keras_contrib.layers.normalization.instancenormalization import InstanceNormalization
-from keras.layers import Input, Dense, Reshape, Flatten, Dropout, Concatenate
-from keras.layers import BatchNormalization, Activation, ZeroPadding2D
-from keras.layers.advanced_activations import LeakyReLU
-from keras.layers.convolutional import UpSampling2D, Conv2D
-from keras.models import Sequential, Model
-from keras.optimizers import Adam
+from tf.keras.layers import Input, Dense, Reshape, Flatten, Dropout, Concatenate
+from tf.keras.layers import BatchNormalization, Activation, ZeroPadding2D
+from tf.keras.layers.advanced_activations import LeakyReLU
+from tf.keras.layers.convolutional import UpSampling2D, Conv2D
+from tf.keras.models import Sequential, Model
+from tf.keras.optimizers import Adam
 import datetime
 import matplotlib.pyplot as plt
 import sys
-from data_loader import DataLoader
 import numpy as np
 import os
 from utils import load_data, load_batch, load_img
@@ -98,6 +96,8 @@ class CycleGAN():
                                             self.lambda_id, self.lambda_id ],
                             optimizer=optimizer)
 
+        print('End building CycleGAN...')
+
     def build_generator(self):
         """U-Net Generator"""
 
@@ -166,9 +166,11 @@ class CycleGAN():
         valid = np.ones((batch_size,) + self.disc_patch)
         fake = np.zeros((batch_size,) + self.disc_patch)
 
+        print('Start training...')
         for epoch in range(epochs):
+            print('Epoch', epoch)
             for batch_i, (imgs_A, imgs_B) in enumerate(AB_train):
-
+                print('Batch', batch_i, 'imgLen', len(imgs_A))
                 # ----------------------
                 #  Train Discriminators
                 # ----------------------
@@ -260,6 +262,6 @@ if __name__ == '__main__':
     # Configure data loader
     dir_A = '../datasets/matting_samples/matting'
     dir_B = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings'
-    AB_train = load_data(dir_A, dir_B, batch_size=config.batch_size)
-    AB_val = load_data(dir_A, dir_B, batch_size=1, is_testing=True)
-    gan.train(AB_train=AB_train, AB_val=, epochs=200, batch_size=1, sample_interval=200)
+    AB_train = load_batch(dir_A, dir_B, batch_size=1)
+    AB_val = load_batch(dir_A, dir_B, batch_size=1, is_testing=True)
+    gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
