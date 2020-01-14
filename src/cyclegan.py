@@ -259,8 +259,8 @@ class CycleGAN():
         # imgs_A, imgs_B = next(AB_val.get_batch(batch_size=1))
 
         for k in range(len(A_val)):
-            imgs_A = [A_val[k]]
-            imgs_B = [B_val[k]]
+            imgs_A = np.array([A_val[k]])
+            imgs_B = np.array([B_val[k]])
             # Translate images to the other domain
             fake_B = self.g_AB.predict(imgs_A)
             fake_A = self.g_BA.predict(imgs_B)
