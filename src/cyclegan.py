@@ -237,15 +237,14 @@ class CycleGAN():
         reconstr_A = self.g_BA.predict(fake_B)
         reconstr_B = self.g_AB.predict(fake_A)
 
-        gen_imgs = np.concatenate([imgs_A, fake_B, reconstr_A, imgs_B, fake_A, reconstr_B], axis=1)
-
-        # Rescale images 0 - 1
-        gen_imgs = 0.5 * gen_imgs + 0.5
-
         titles = ['Original', 'Translated', 'Reconstructed']
-        cnt = 0
         for k in range(len(imgs_A)):
+            gen_imgs = np.concatenate([imgs_A[k], fake_B[k], reconstr_A[k], imgs_B[k], fake_A[k], reconstr_B[k]])
+            # Rescale images 0 - 1
+            gen_imgs = 0.5 * gen_imgs + 0.5
+
             fig, axs = plt.subplots(r, c)
+            cnt = 0
             for i in range(r):
                 for j in range(c):
                     axs[i,j].imshow(gen_imgs[cnt])
