@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import sys
 import numpy as np
 from utils import DataLoader
+import tensorflow as tf 
 
 class Config():
     def __init__(self):
@@ -96,7 +97,8 @@ class CycleGAN():
                                             self.lambda_cycle, self.lambda_cycle,
                                             self.lambda_id, self.lambda_id ],
                             optimizer=optimizer)
-
+        
+        self.build_summary()
         print('End building CycleGAN...')
 
     def build_generator(self):
@@ -162,6 +164,24 @@ class CycleGAN():
 
         return Model(img, validity)
 
+    def build_summary(self):
+        # Start tensorboard 
+        self.sess = tf.Session()
+        os.makedirs('logs/', exist_ok=True)
+        logdir = "logs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + "/"
+
+        self.writer = tf.summary.FileWriter(logdir, self.sess.graph)
+
+        self.D_LOSS = tf.placeholder(tf.float32, [])
+        self.D_ACC = tf.placeholder(tf.float32, [])
+        self.G_LOSS = tf.placeholder(tf.float32, [])
+        tf.summary.scalar("D_LOSS", self.D_LOSS)
+        tf.summary.scalar("D_ACC", self.D_ACC)
+        tf.summary.scalar("G_LOSS", self.G_LOSS)
+        
+        self.merged = tf.summary.merge_all()
+        # End tensorboard
+
     def train(self, epochs, AB_train, AB_val, batch_size=1, sample_interval=50):
 
         start_time = datetime.datetime.now()
@@ -171,8 +191,10 @@ class CycleGAN():
         fake = np.zeros((batch_size,) + self.disc_patch)
 
         print('Start training...')
+        step = 0
         for epoch in range(epochs):
             for batch_i, (imgs_A, imgs_B) in enumerate(AB_train.get_batch(batch_size)):
+                step += 1
                 # ----------------------
                 #  Train Discriminators
                 # ----------------------
@@ -189,6 +211,7 @@ class CycleGAN():
                 dB_loss_real = self.d_B.train_on_batch(imgs_B, valid)
                 dB_loss_fake = self.d_B.train_on_batch(fake_B, fake)
                 dB_loss = 0.5 * np.add(dB_loss_real, dB_loss_fake)
+                
 
                 # Total disciminator loss
                 d_loss = 0.5 * np.add(dA_loss, dB_loss)
@@ -205,6 +228,11 @@ class CycleGAN():
                                                         imgs_A, imgs_B])
 
                 elapsed_time = datetime.datetime.now() - start_time
+
+
+                summary = self.sess.run(self.merged, feed_dict={self.D_LOSS: d_loss[0], self.D_ACC: 100*d_loss[1], self.G_LOSS: g_loss[0]}) 
+                self.writer.add_summary(summary, step)
+
 
                 # Plot the progress
                 print ("[Epoch %d/%d] [Batch %d/%d] [D loss: %f, acc: %3d%%] [G loss: %05f, adv: %05f, recon: %05f, id: %05f] time: %s " \
