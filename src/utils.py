@@ -1,4 +1,4 @@
-import scipy
+import scipy.misc
 from glob import glob
 import numpy as np
 
@@ -33,8 +33,8 @@ def load_data(dirpath, batch_size=1, is_testing=False, w=128, h=128):
     return imgs
 
 def load_batch(dir_A, dir_B, batch_size=1, is_testing=False, w=128, h=128):
-    path_A = glob(dir_A)
-    path_B = glob(dir_B)
+    path_A = glob(dir_A+'*')
+    path_B = glob(dir_B+'*')
     print(len(path_A), len(path_B))
 
     n_batches = int(min(len(path_A), len(path_B)) / batch_size)
