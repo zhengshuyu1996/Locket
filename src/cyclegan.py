@@ -15,7 +15,6 @@ import numpy as np
 import os
 from utils import DataLoader
 
-# 以下写成config
 class Config():
     def __init__(self):
         self.img_rows = 128

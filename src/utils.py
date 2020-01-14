@@ -13,17 +13,17 @@ def load_img(path, w=128, h=128):
 
 class DataLoader():
     def __init__(self, dir_A, dir_B, img_res=(128, 128), is_testing=False):
-        self.dir_A = dir_A + '*'
-        self.dir_B = dir_B + '*'
+        self.path_A = dir_A + '*'
+        self.path_B = dir_B + '*'
         self.img_res = img_res
         self.is_testing = is_testing
         print("A_len: %d, B_len: %d"%(len(self.dir_A), len(self.dir_A)))
 
     def get_dataset_A(self):
-        return self.get_dataset(self.dir_A)
+        return self.get_dataset(self.path_A)
 
     def get_dataset_B(self):
-        return self.get_dataset(self.dir_B)
+        return self.get_dataset(self.path_B)
 
     def get_dataset(self, dirpath):
         paths = glob(dirpath)
