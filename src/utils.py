@@ -17,7 +17,7 @@ class DataLoader():
         self.dir_B = dir_B + '*'
         self.img_res = img_res
         self.is_testing = is_testing
-        print("A_len: %d, B_len: %d"%(len(self.path_A), len(self.path_B)))
+        print("A_len: %d, B_len: %d"%(len(self.dir_A), len(self.dir_A)))
 
     def get_dataset_A(self):
         return self.get_dataset(self.dir_A)
