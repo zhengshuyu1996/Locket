@@ -19,14 +19,16 @@ class DataLoader():
         self.is_testing = is_testing
         print("A_len: %d, B_len: %d"%(len(self.path_A), len(self.path_B)))
 
-    def get_dataset_A(self):
-        return self.get_dataset(self.path_A)
+    def get_dataset_A(self, batch_size=1):
+        return self.get_dataset(self.path_A, batch_size)
 
-    def get_dataset_B(self):
-        return self.get_dataset(self.path_B)
+    def get_dataset_B(self, batch_size=1):
+        return self.get_dataset(self.path_B, batch_size)
 
-    def get_dataset(self, paths):
+    def get_dataset(self, path, batch_size=1):
         imgs = []
+        paths = np.random.choice(path, batch_size, replace=False)
+        print(paths)
         for img_path in paths:
             img = imread(img_path)
             if not self.is_testing:
@@ -39,7 +41,6 @@ class DataLoader():
             imgs.append(img)
 
         imgs = np.array(imgs)/127.5 - 1.
-
         return imgs
 
     def get_batch(self, batch_size=1):
@@ -73,5 +74,4 @@ class DataLoader():
             imgs_B = np.array(imgs_B)/127.5 - 1.
 
             yield imgs_A, imgs_B
-
 
