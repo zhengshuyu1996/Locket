@@ -19,7 +19,7 @@ class Config():
     def __init__(self):
         self.img_rows = 128
         self.img_cols = 128
-        self.channels = 4
+        self.channels = 3
         # Number of filters in the first layer of G and D
         self.gf = 32
         self.df = 64
@@ -263,8 +263,8 @@ if __name__ == '__main__':
     config = Config()
     gan = CycleGAN(config)
     # Configure data loader
-    dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/'
-    dir_B = '../datasets/matting_samples/matting/'
+    dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/iconography/'
+    dir_B = '../datasets/matting_samples/clip/'
     AB_train = DataLoader(dir_A, dir_B)
     AB_val = DataLoader(dir_A, dir_B, is_testing=True)
     gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
