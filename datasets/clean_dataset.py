@@ -26,8 +26,14 @@ def clean_data(data_dir):
         os.remove('{}/{}'.format(data_dir, del_file))
     
     
-# clean_data('art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings')
+dirs = os.listdir('art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/')
+for i in dirs:
+    clean_data('art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/'+i)
+
 # path = 'matting_samples/matting/1803151818-00000101.png'
-path = 'art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/images.jpeg'
-img = scipy.misc.imread(path, mode='RGBA').astype(np.float)
-print(img)
+# path = 'art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/images.jpeg'
+# img = scipy.misc.imread(path, mode='RGBA').astype(np.float)
+# print(img)
+
+
+
