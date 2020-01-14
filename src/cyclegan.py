@@ -268,7 +268,7 @@ if __name__ == '__main__':
     AB_train = DataLoader(dir_A, dir_B)
     AB_val = DataLoader(dir_A, dir_B, is_testing=True)
     
-    gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
+    gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=8, sample_interval=200)
     gan.save_models('../models/')
 
 
