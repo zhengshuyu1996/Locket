@@ -1,5 +1,8 @@
 from __future__ import print_function, division
 import scipy
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['PYTHONHASHSEED'] = '0'
 
 from tensorflow.keras.layers import Input, Dense, Reshape, Flatten, Dropout, Concatenate
 from tensorflow.keras.layers import BatchNormalization, Activation, ZeroPadding2D
@@ -12,7 +15,6 @@ import datetime
 import matplotlib.pyplot as plt
 import sys
 import numpy as np
-import os
 from utils import DataLoader
 
 class Config():
