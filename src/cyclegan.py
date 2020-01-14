@@ -17,8 +17,8 @@ from utils import DataLoader
 
 class Config():
     def __init__(self):
-        self.img_rows = 128
-        self.img_cols = 128
+        self.img_rows = 256
+        self.img_cols = 256
         self.channels = 3
         # Number of filters in the first layer of G and D
         self.gf = 32
@@ -219,7 +219,7 @@ class CycleGAN():
                 if batch_i % sample_interval == 0:
                     self.sample_images(AB_val, epoch, batch_i)
 
-        self.save_models()
+        # self.save_models()
 
     def sample_images(self, AB_val, epoch, batch_i):
         os.makedirs('images/', exist_ok=True)
@@ -251,11 +251,11 @@ class CycleGAN():
         fig.savefig("images/%d_%d.png" % (epoch, batch_i))
         plt.close()
 
-    def save_models(self):
-        save_model(self.g_AB, '../models/g_AB')
-        save_model(self.g_BA, '../models/g_BA')
-        save_model(self.d_B, '../models/d_B')
-        save_model(self.d_A, '../models/d_A')
+    def save_models(self, save_path):
+        save_model(self.g_AB, save_path+'g_AB')
+        save_model(self.g_BA, save_path+'g_BA')
+        save_model(self.d_B, save_path+'d_B')
+        save_model(self.d_A, save_path+'d_A')
 
 
 
@@ -263,9 +263,12 @@ if __name__ == '__main__':
     config = Config()
     gan = CycleGAN(config)
     # Configure data loader
-    dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/iconography/'
+    dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/painting/'
     dir_B = '../datasets/matting_samples/clip/'
     AB_train = DataLoader(dir_A, dir_B)
     AB_val = DataLoader(dir_A, dir_B, is_testing=True)
+    
     gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
+    gan.save_models('../models/')
+
 
