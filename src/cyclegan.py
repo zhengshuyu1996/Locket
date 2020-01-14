@@ -255,25 +255,26 @@ class CycleGAN():
         os.makedirs('images/', exist_ok=True)
         r, c = 2, 3
 
-        imgs_A, imgs_B = AB_val
+        (A_val, B_val) = AB_val
         # imgs_A, imgs_B = next(AB_val.get_batch(batch_size=1))
 
-        # Translate images to the other domain
-        fake_B = self.g_AB.predict(imgs_A)
-        fake_A = self.g_BA.predict(imgs_B)
-        # Translate back to original domain
-        reconstr_A = self.g_BA.predict(fake_B)
-        reconstr_B = self.g_AB.predict(fake_A)
+        for k in range(len(A_val)):
+            imgs_A = A_val[k]
+            imgs_B = B_val[k]
+            # Translate images to the other domain
+            fake_B = self.g_AB.predict(imgs_A)
+            fake_A = self.g_BA.predict(imgs_B)
+            # Translate back to original domain
+            reconstr_A = self.g_BA.predict(fake_B)
+            reconstr_B = self.g_AB.predict(fake_A)
 
-        titles = ['Original', 'Translated', 'Reconstructed']
-        for k in range(len(imgs_A)):
-            gen_imgs = np.concatenate([imgs_A[k], fake_B[k], reconstr_A[k], imgs_B[k], fake_A[k], reconstr_B[k]])
+            titles = ['Original', 'Translated', 'Reconstructed']
+            gen_imgs = np.concatenate([imgs_A, fake_B, reconstr_A, imgs_B, fake_A, reconstr_B])
             # Rescale images 0 - 1
             gen_imgs = 0.5 * gen_imgs + 0.5
 
             fig, axs = plt.subplots(r, c)
             cnt = 0
-            
             for i in range(r):
                 for j in range(c):
                     axs[i,j].imshow(gen_imgs[cnt])
