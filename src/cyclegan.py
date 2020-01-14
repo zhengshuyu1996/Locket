@@ -1,12 +1,12 @@
 from __future__ import print_function, division
 import scipy
 
-from keras_contrib.layers.normalization.instancenormalization import InstanceNormalization
 from tensorflow.keras.layers import Input, Dense, Reshape, Flatten, Dropout, Concatenate
 from tensorflow.keras.layers import BatchNormalization, Activation, ZeroPadding2D
 from tensorflow.keras.layers import LeakyReLU
 from tensorflow.keras.layers import UpSampling2D, Conv2D
 from tensorflow.keras import Sequential, Model
+from tensorflow.keras.models import save_model, load_model
 from tensorflow.keras.optimizers import Adam
 import datetime
 import matplotlib.pyplot as plt
@@ -19,7 +19,7 @@ class Config():
     def __init__(self):
         self.img_rows = 128
         self.img_cols = 128
-        self.channels = 3
+        self.channels = 4
         # Number of filters in the first layer of G and D
         self.gf = 32
         self.df = 64
@@ -219,6 +219,8 @@ class CycleGAN():
                 if batch_i % sample_interval == 0:
                     self.sample_images(AB_val, epoch, batch_i)
 
+        self.save_models()
+
     def sample_images(self, AB_val, epoch, batch_i):
         os.makedirs('images/', exist_ok=True)
         r, c = 2, 3
@@ -248,6 +250,13 @@ class CycleGAN():
                 cnt += 1
         fig.savefig("images/%d_%d.png" % (epoch, batch_i))
         plt.close()
+
+    def save_models(self):
+        save_model(self.g_AB, '../models/g_AB')
+        save_model(self.g_BA, '../models/g_BA')
+        save_model(self.d_B, '../models/d_B')
+        save_model(self.d_A, '../models/d_A')
+
 
 
 if __name__ == '__main__':
