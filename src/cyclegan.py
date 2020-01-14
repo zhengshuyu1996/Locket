@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import sys
 import numpy as np
 import os
-from utils import load_data, load_batch, load_img
+from utils import DataLoader
 
 # 以下写成config
 class Config():
@@ -171,7 +171,7 @@ class CycleGAN():
 
         print('Start training...')
         for epoch in range(epochs):
-            for batch_i, (imgs_A, imgs_B) in enumerate(AB_train):
+            for batch_i, (imgs_A, imgs_B) in enumerate(AB_train.get_batch(batch_size)):
                 # ----------------------
                 #  Train Discriminators
                 # ----------------------
@@ -206,9 +206,9 @@ class CycleGAN():
                 elapsed_time = datetime.datetime.now() - start_time
 
                 # Plot the progress
-                print ("[Epoch %d/%d] [Batch %d] [D loss: %f, acc: %3d%%] [G loss: %05f, adv: %05f, recon: %05f, id: %05f] time: %s " \
+                print ("[Epoch %d/%d] [Batch %d/%d] [D loss: %f, acc: %3d%%] [G loss: %05f, adv: %05f, recon: %05f, id: %05f] time: %s " \
                                                                         % ( epoch, epochs,
-                                                                            batch_i,
+                                                                            batch_i, AB_train.n_batches,
                                                                             d_loss[0], 100*d_loss[1],
                                                                             g_loss[0],
                                                                             np.mean(g_loss[1:3]),
@@ -224,7 +224,7 @@ class CycleGAN():
         os.makedirs('images/', exist_ok=True)
         r, c = 2, 3
 
-        imgs_A, imgs_B = next(AB_val)
+        imgs_A, imgs_B = AB_val.get_batch(batch_size=1)
 
         # Translate images to the other domain
         fake_B = self.g_AB.predict(imgs_A)
@@ -257,7 +257,7 @@ if __name__ == '__main__':
     # Configure data loader
     dir_A = '../datasets/matting_samples/matting/'
     dir_B = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/'
-    AB_train = load_batch(dir_A, dir_B, batch_size=1)
-    AB_val = load_batch(dir_A, dir_B, batch_size=1, is_testing=True)
+    AB_train = DataLoader(dir_A, dir_B)
+    AB_val = DataLoader(dir_A, dir_B, is_testing=True)
     gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
 
