@@ -237,7 +237,7 @@ class CycleGAN():
         reconstr_A = self.g_BA.predict(fake_B)
         reconstr_B = self.g_AB.predict(fake_A)
 
-        gen_imgs = np.concatenate([imgs_A, fake_B, reconstr_A, imgs_B, fake_A, reconstr_B])
+        gen_imgs = np.concatenate([imgs_A, fake_B, reconstr_A, imgs_B, fake_A, reconstr_B], axis=1)
 
         # Rescale images 0 - 1
         gen_imgs = 0.5 * gen_imgs + 0.5
