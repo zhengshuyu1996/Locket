@@ -2,12 +2,12 @@ from __future__ import print_function, division
 import scipy
 
 from keras_contrib.layers.normalization.instancenormalization import InstanceNormalization
-from tf.keras.layers import Input, Dense, Reshape, Flatten, Dropout, Concatenate
-from tf.keras.layers import BatchNormalization, Activation, ZeroPadding2D
-from tf.keras.layers.advanced_activations import LeakyReLU
-from tf.keras.layers.convolutional import UpSampling2D, Conv2D
-from tf.keras.models import Sequential, Model
-from tf.keras.optimizers import Adam
+from keras.layers import Input, Dense, Reshape, Flatten, Dropout, Concatenate
+from keras.layers import BatchNormalization, Activation, ZeroPadding2D
+from keras.layers.advanced_activations import LeakyReLU
+from keras.layers.convolutional import UpSampling2D, Conv2D
+from keras.models import Sequential, Model
+from keras.optimizers import Adam
 import datetime
 import matplotlib.pyplot as plt
 import sys
@@ -205,9 +205,9 @@ class CycleGAN():
                 elapsed_time = datetime.datetime.now() - start_time
 
                 # Plot the progress
-                print ("[Epoch %d/%d] [Batch %d/%d] [D loss: %f, acc: %3d%%] [G loss: %05f, adv: %05f, recon: %05f, id: %05f] time: %s " \
+                print ("[Epoch %d/%d] [Batch %d] [D loss: %f, acc: %3d%%] [G loss: %05f, adv: %05f, recon: %05f, id: %05f] time: %s " \
                                                                         % ( epoch, epochs,
-                                                                            batch_i, self.data_loader.n_batches,
+                                                                            batch_i,
                                                                             d_loss[0], 100*d_loss[1],
                                                                             g_loss[0],
                                                                             np.mean(g_loss[1:3]),
@@ -224,12 +224,6 @@ class CycleGAN():
         r, c = 2, 3
 
         imgs_A, imgs_B = next(AB_val)
-        # imgs_A = load_data(dirpath="A", batch_size=1, is_testing=True)
-        # imgs_B = load_data(dirpath="B", batch_size=1, is_testing=True)
-
-        # Demo (for GIF)
-        #imgs_A = self.data_loader.load_img('datasets/apple2orange/testA/n07740461_1541.jpg')
-        #imgs_B = self.data_loader.load_img('datasets/apple2orange/testB/n07749192_4241.jpg')
 
         # Translate images to the other domain
         fake_B = self.g_AB.predict(imgs_A)
@@ -260,8 +254,8 @@ if __name__ == '__main__':
     config = Config()
     gan = CycleGAN(config)
     # Configure data loader
-    dir_A = '../datasets/matting_samples/matting'
-    dir_B = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings'
+    dir_A = '../datasets/matting_samples/matting/'
+    dir_B = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/drawings/'
     AB_train = load_batch(dir_A, dir_B, batch_size=1)
     AB_val = load_batch(dir_A, dir_B, batch_size=1, is_testing=True)
     gan.train(AB_train=AB_train, AB_val=AB_val, epochs=200, batch_size=1, sample_interval=200)
