@@ -245,13 +245,13 @@ class CycleGAN():
                                                                             np.mean(g_loss[5:6]),
                                                                             elapsed_time))
 
-                # If at save interval => save generated image samples
-                if batch_i % sample_interval == 0:
-                    self.sample_images(AB_val, epoch, batch_i)
+            # If at save interval => save generated image samples
+            if epoch % sample_interval == 0:
+                self.sample_images(AB_val, epoch)
 
         # self.save_models()
 
-    def sample_images(self, AB_val, epoch, batch_i):
+    def sample_images(self, AB_val, epoch):
         os.makedirs('images/', exist_ok=True)
         r, c = 2, 3
 
@@ -281,7 +281,7 @@ class CycleGAN():
                     axs[i,j].set_title(titles[j])
                     axs[i,j].axis('off')
                     cnt += 1
-            fig.savefig("images/%d_%d_%d.png" % (epoch, batch_i, k))
+            fig.savefig("images/%d_%d.png" % (epoch, k))
             plt.close()
 
     def save_models(self, save_path):
@@ -304,7 +304,7 @@ if __name__ == '__main__':
     A_sample = AB_val.get_dataset_A(sample_num)
     B_sample = AB_val.get_dataset_B(sample_num)
 
-    gan.train(AB_train=AB_train, AB_val=(A_sample, B_sample), epochs=200, batch_size=8, sample_interval=200)
+    gan.train(AB_train=AB_train, AB_val=(A_sample, B_sample), epochs=200, batch_size=8, sample_interval=5)
     gan.save_models('../models/')
 
 
