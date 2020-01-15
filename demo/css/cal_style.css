@@ -20,12 +20,16 @@ body {
     background-color: #FBFBFB;
 }
 
+.bg-blue {
+    background-color: rgb(6, 56, 67);
+}
+
 .color-white {
     color: #FBFBFB;
 }
 
 .invisible {
-    visibility: hidden;
+    opacity: 0;
 }
 
 .clickable:hover {
@@ -56,6 +60,14 @@ body {
     cursor: pointer;
 }
 
+.fill-parent {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .score-board {
     width: 500px;
     position: absolute;
@@ -78,9 +90,10 @@ body {
     margin-left: -150px;
 }
 
-.menu-center button {
-    width: 200px;
-    margin: 20px;
+.menu-center h5 {
+    font-weight: 200;
+    font-style: italic;
+    margin-top: 40px;
 }
 
 .menu-player {
@@ -196,297 +209,6 @@ body {
     width: 100%;
     height: 50px;
     background-color: rgba(255, 255, 255, 0.8);
-}
-
-.noble-container {
-    margin: 10px 10px 10px 30px;
-}
-
-.noble {
-    text-align: center;
-    position: relative;
-    margin: 10px 0;
-    width: 90px;
-    height: 90px;
-}
-
-.noble .noble-bg {
-    width: 90px;
-    height: 90px;
-}
-
-.noble .noble-mask {
-    position: absolute;
-    background: rgba(216,216,216,0.8);
-    /*opacity: 0.8;*/
-    display: flex;
-    flex-direction: column-reverse;
-    height: 90px;
-}
-
-.noble-requirement{
-    line-height: 25px;
-    margin:auto;
-    font-size: 22px;
-    font-weight: bold;
-    margin: 1px;
-    color: #fff;
-    -webkit-text-stroke: 1px #666;  
-    width: 28px;
-    height: 28px;
-    border-radius: 5px;
-    border: rgb(210, 210, 210) solid 1px !important;
-}
-
-.noble-level{
-    position: absolute;
-    right: 4px;
-    bottom: 0;
-    color: #393939;
-    font-weight: bold;
-    font-size: 24px;
-    color: #393939;
-    -webkit-text-stroke: 1px white;  
-}
-
-
-.card-container {
-    margin: 10px 50px;
-    width: 500px;
-}
-
-.playcard {
-    width: 87px;
-    position: relative;
-    margin: 0 3px;
-    box-sizing: border-box;
-}
-
-.playcard .playcard-bg {
-    width: 87px;
-    height: 150px;
-}
-
-.playcard .playcard-level {
-    color: #393939;
-    font-weight: bold;
-    font-size: 24px;
-    color: #393939;
-}
-
-.playcard .playcard-mask {
-    width: 87px;
-    position: absolute;
-    background: #e0e0e0;
-    opacity: 0.8;
-    padding: 0 5px;
-}
-
-.playcard .playcard-color {
-    width:30px;
-    height:30px;
-}
-
-.playcard .playcard-costs {
-    position: absolute;
-    bottom: 5px;
-    height: 60px;
-    display: flex;
-    flex-direction: column-reverse;
-    flex-wrap: wrap; 
-}
-
-.playcard-cost {
-    line-height: 25px;
-    margin:auto;
-    font-weight: bold;
-    margin: 1px;
-    color: #fff;
-    -webkit-text-stroke: 1px #666;  
-    width: 28px;
-    height: 28px;
-    border-radius: 30px;
-    border: rgb(210, 210, 210) solid 1px !important;
-}
-
-.gem-container {
-    width: 100px;
-    margin-right: 30px;
-}
-
-.gem-warpper {
-    width: 160px;
-}
-
-.gems-count {
-    font-size: 18px;
-    width: 40px;
-    display: inline-block;
-}
-
-.gems {
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    border-radius: 60px;
-    position: relative;
-    margin: 10px 0;
-    text-align: center;
-    /*visibility: hidden;*/
-}
-
-.gems img {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    left: 50%;
-    margin-left: -20px;
-    top: 50%;
-    margin-top: -20px;
-}
-
-.myhand {
-    width: 100%;
-    height: 130px;
-    position: fixed;
-    bottom: 0;
-}
-
-.myhand .user {
-    position: absolute;
-    left: 30px;
-    bottom: 0;
-    width: 140px;
-    height: 140px;
-    border-radius: 100%;
-    text-align: center;
-    padding: 15px 0;
-    text-transform: uppercase;
-}
-
-.myhand .user img {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    left: 50%;
-    margin-left: -30px;
-    top: 50%;
-    margin-top: -25px;
-}
-
-.player-name {
-    height: 40px;
-    width: 80px;
-    border-radius: 0 30px 30px 0;
-    position: absolute;
-    left: 137px;
-    bottom: 10px;
-}
-
-.gem_panel {
-    background-color: #eee;
-    position: absolute;
-    right: 0;
-    margin-right: calc((57% - 170px) / 2);
-    width: 60%;
-    height: 81px;
-    border-radius: 20px;
-}
-
-.gem_panel_oppenent {
-    background-color: #eee;
-    /*position: absolute;*/
-    /*right: 0;*/
-    /*margin-right: calc((57% - 170px) / 2);*/
-    width: 800px;
-    height: 81px;
-    border-radius: 20px;
-    margin: 20px 0;
-}
-
-.gem_total{
-    text-align: center;
-    line-height: 25px;
-    margin:auto;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 1px;
-    color: #fff;
-    -webkit-text-stroke: 1px #666;  
-    width: 48px;
-    height: 48px;
-    border-radius: 38px;
-    border: rgb(210, 210, 210) solid 1px !important;
-    transform:rotate(-20deg);
-}
-
-.gem_slot{
-    height: 80px;
-    border-radius: 10px;
-    border: 3px solid #eee !important;
-    /* box-shadow: 0px 0px 100px rgba(64, 64, 64, 0.8) inset; */
-}
-
-.gem_discount{
-    text-align: center;
-    line-height: 45px;
-    margin:auto;
-    font-size: 32px;
-    font-weight: bold;
-    margin: 1px;
-    color: #fff;
-    -webkit-text-stroke: 1px #666;  
-    width: 38px;
-    height: 48px;
-    border-radius: 10px;
-    border: rgb(210, 210, 210) solid 3px !important;
-}
-
-.gem_count{
-    text-align: center;
-    line-height: 35px;
-    margin:auto;
-    font-size: 32px;
-    font-weight: bold;
-    margin: 10px 1px 1px;
-    color: #fff;
-    -webkit-text-stroke: 1px #666;  
-    width: 38px;
-    height: 38px;
-    border-radius: 38px;
-    border: rgb(210, 210, 210) solid 3px !important;
-}
-
-.gem_gold{
-    background-color: #F5A623;
-    color: #FFF;
-    width: 48px;
-    height: 48px;
-    border-radius: 50px;
-    font-size: 36px;
-    line-height: 48px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.reserved-cards {
-    width: 284px;
-    position: absolute;
-    right: -30px;
-    /*margin-right: 10px;*/
-    text-align: center;
-}
-
-.reserved-cards-oppenent {
-    width: 500px;
-    margin: 20px;
-    text-align: center;
-}
-
-.purchased-cards {
-    width: 90%;
-    margin: 20px;
-    text-align: center;
 }
 
 .pause-cover {
