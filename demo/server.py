@@ -36,4 +36,4 @@ def step():
     return send_from_directory(app.config['UPLOAD_FOLDER'],"cards.json")
 
 if __name__ == '__main__':
-    app.run(host="162.105.175.5", port=1996)
+    app.run(host="35.189.165.204", port=80)
