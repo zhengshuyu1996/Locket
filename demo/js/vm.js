@@ -3,7 +3,7 @@ var vm = new Vue({
     data: {
         mode: 'welcome',
         show_path: false,
-        base_url: 'http://127.0.0.1:9090/',
+        base_url: 'http://35.189.165.204:80/',
         up_image: null,
         imgData: {
             accept: 'image/gif, image/jpeg, image/png, image/jpg',
