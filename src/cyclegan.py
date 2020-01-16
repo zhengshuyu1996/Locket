@@ -282,27 +282,45 @@ class CycleGAN():
             fig.savefig("images/%d_%d.png" % (epoch, k))
             plt.close()
 
+    def test(self, sample):
+        for k in range(len(sample)):
+            imgs_B = np.array([sample[k]])
+            fake_A = self.g_BA.predict(imgs_B)
+            gen_imgs = (0.5 * fake_A + 0.5) * 255
+            imwrite("images/%d.png"%k, gen_imgs[0].astype(np.uint8))
+
+
     def save_models(self, save_path):
         save_model(self.g_AB, save_path+'g_AB')
         save_model(self.g_BA, save_path+'g_BA')
         save_model(self.d_B, save_path+'d_B')
         save_model(self.d_A, save_path+'d_A')
 
+    def load_models(self, save_path):
+        self.g_AB = load_model(save_path+'g_AB')
+        self.g_BA = load_model(save_path+'g_BA')
+        self.d_A = load_model(save_path+'d_A')
+        self.d_B = load_model(save_path+'d_B')
+
 
 
 if __name__ == '__main__':
     config = Config()
     gan = CycleGAN(config)
+    gan.load_models('../models/')
+    
+
     # Configure data loader
     dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/painting/'
     dir_B = '../datasets/matting_samples/clip/'
     AB_train = DataLoader(dir_A, dir_B, img_res=(256,256))
     AB_val = DataLoader(dir_A, dir_B, is_testing=True, img_res=(256,256))
-    sample_num = 10
+    sample_num = 50
     A_sample = AB_val.get_dataset_A(sample_num)
     B_sample = AB_val.get_dataset_B(sample_num)
 
-    gan.train(AB_train=AB_train, AB_val=(A_sample, B_sample), epochs=200, batch_size=8, sample_interval=5)
-    gan.save_models('../models/')
+    gan.test(B_sample)
+    # gan.train(AB_train=AB_train, AB_val=(A_sample, B_sample), epochs=200, batch_size=8, sample_interval=5)
+    # gan.save_models('../models/')
 
 
