@@ -110,7 +110,7 @@ body {
 .painting-img {
 /*    width: 170px;
     height: 230px;*/
-    width: 47vw;
+    width: 46vw;
     height: 64.5vw;
     margin-left: auto;
     margin-right: auto;
@@ -120,7 +120,7 @@ body {
     left: 75px;
     border-radius: 87px;*/
     top: 36vw;
-    left: 21vw;
+    left: 21.5vw;
     border-radius: 24.5vw;
 }
 
@@ -212,7 +212,7 @@ body {
 }
 
 .attribution {
-    position: fixed;
+    position: absolute;
     bottom: 2px;
     left: 0;
     width: 100%;
@@ -225,6 +225,7 @@ body {
     top: 0;
     left: 0;
     text-align: center;
+    position: relative;
 }
 
 .menu-center {
