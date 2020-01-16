@@ -13,8 +13,8 @@ class DeepLabModel(object):
         self.graph = tf.Graph()
 
         graph_def = None
-        with tf.gfile.GFile(path, 'rb')as file_handle:
-            graph_def = tf.GraphDef.FromString(file_handle.read())
+        with tf.io.gfile.GFile(path, 'rb')as file_handle:
+            graph_def = tf.compat.v1.GraphDef.FromString(file_handle.read())
 
         if graph_def is None:
             raise RuntimeError('Cannot find inference graph in tar archive.')
@@ -22,7 +22,7 @@ class DeepLabModel(object):
         with self.graph.as_default():
             tf.import_graph_def(graph_def, name='')
 
-        self.sess = tf.Session(graph=self.graph)
+        self.sess = tf.compat.v1.Session(graph=self.graph)
 
     def run(self, image):
         """Runs inference on a single image.
@@ -52,11 +52,9 @@ class DeepLab_Matting(object):
     def run(self, path):
         img = Image.open(path)
         resized_im, seg_map = self.MODEL.run(img)
+        seg_map[seg_map==1] = 255
         img_arr = np.array(resized_im)
-        res_arr = np.concatenate((img_arr, np.expand_dims(seg_map, -1)), -1).astype(np.uint8)
+        res_arr = np.concatenate((img_arr, np.expand_dims(seg_map, -1)), -1).astype(np.uint8)        
         return res_arr
 
 
-# if __name__ == "__main__":
-#     matting = DeepLab_Matting('/home/celbree/MattingHuman/deeplab_custom/exp/save/model.pb')
-#     res = matting.run('/home/celbree/MattingHuman/deeplab_custom/dataset/test.jpg')

@@ -26,11 +26,11 @@ class ImgLoader(object):
 
     def apply_matting(self, in_path, out_path):
         if not os.path.exists(out_path):
-            matting_img = self.Matting.run(in_path)
-            img = Image.open(matting_img).convert('RGBA')
-            img.save(out_path)
+            res_arr = self.Matting.run(in_path)
+            res_img = Image.fromarray(res_arr, mode='RGBA')
+            res_img.save(out_path, 'PNG')
 
     def transfer(self, in_path, out_path):
-        if not os.path.exists(out_path):
-            self.G.inference(in_path, out_path)
+        # if not os.path.exists(out_path):
+        self.G.inference(in_path, out_path)
 

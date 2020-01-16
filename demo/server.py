@@ -41,7 +41,7 @@ def step():
                 # read image (save the image if not existed)
                 img_loader.save_image(data['image'], original_path)
                 # Do human matting
-                # img_loader.apply_matting(original_path, matting_path)
+                img_loader.apply_matting(original_path, matting_path)
                 # Combine human figure and background
                 # img_with_bg = img_loader.combine_bg(matting_path)
                 # Style Transfer
