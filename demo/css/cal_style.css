@@ -151,6 +151,44 @@ body {
     left: 48px;
 }
 
+@media (min-width: 900px) {
+    .painting-bg {
+        width: 58vh;
+        height: 70vh;
+    }
+
+    .painting-img {
+        width: 30vh;
+        height: 42vh;
+        top: 23vh;
+        left: 14vh;
+        border-radius: 15.8vh;
+    }
+
+    .drawing-bg {
+        width: 63vh;
+        height: 70vh;
+    }
+
+    .drawing-img {
+        margin-top: -5.8vh;
+        width: 42vh;
+        height: 42vh;
+    }
+
+    .simpson-bg {
+        width: 60vh;
+        height: 70vh;
+    }
+
+    .simpson-img {
+        width: 35vh;
+        height: 28vh;
+        top: 28vh;
+        left: 9.6vh;
+    }
+}
+
 .citition {
     margin-top: 10px;
 }
