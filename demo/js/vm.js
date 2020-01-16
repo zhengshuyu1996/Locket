@@ -7,6 +7,11 @@ var vm = new Vue({
         up_image: null,
         imgData: {
             accept: 'image/gif, image/jpeg, image/png, image/jpg',
+        },
+        result_path: {
+            original: '',
+            matting: '',
+            transfer: ''
         }
     },
     computed: {
@@ -45,7 +50,8 @@ var vm = new Vue({
                     data: JSON.stringify(upload_data),
                     success: function(res) {
                         console.log('success', res.data)
-                        this.mode = 'choice'
+                        this.result_path = res.data
+                        this.mode = 'result'
                         // that.loading = false
                         // that.ai_step = res.data
                         // that.moveAI(res.data)

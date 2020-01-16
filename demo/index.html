@@ -31,15 +31,24 @@
                     </i>
                 </button>
             </div>
-            <div style="position: fixed; bottom:0; right: 10px">
-                <a href="https://www.freepik.com/free-photos-vectors/hand" class="grey-text">Hand vector created by freepik</a>
-            </div>
         </div>
         <div v-show="mode == 'choice'" class="bg-blue valign-wrapper menu">
             Choose your destination
             <button class="waves-effect waves-light btn light-green">
                 Random
             </button>
+        </div>
+        <div v-show="mode == 'reslut'" class="bg-blue valign-wrapper menu">
+            <div class="valign menu-center orange-text text-lighten-5">
+                <img :src="base_url+result_path.transfer" width="200px" height="200px" />
+                <!-- <h4>Locket</h4>
+                <h5>上传自拍，开始画像</h5>
+                <button class="waves-effect waves-light btn light-green">
+                    <i class="fa fa-play">
+                        <input id="upfile" class="fill-parent invisible" type="file" name="upfile" @change='add_img'/>
+                    </i>
+                </button> -->
+            </div>
         </div>
     </div>
     <script type='text/javascript' src='js/vue.min.js'></script>
