@@ -57,6 +57,6 @@ class DeepLab_Matting(object):
         return res_arr
 
 
-if __name__ == "__main__":
-    matting = DeepLab_Matting('/home/celbree/MattingHuman/deeplab_custom/exp/save/model.pb')
-    res = matting.run('/home/celbree/MattingHuman/deeplab_custom/dataset/test.jpg')
+# if __name__ == "__main__":
+#     matting = DeepLab_Matting('/home/celbree/MattingHuman/deeplab_custom/exp/save/model.pb')
+#     res = matting.run('/home/celbree/MattingHuman/deeplab_custom/dataset/test.jpg')

@@ -6,7 +6,7 @@ import tensorflow as tf
 
 class CartoonGAN(object):
     def __init__(self, path):
-        self.G = tf.saved_model.load(path)
+        self.G = tf.saved_model.load(path, None)
         self.f = self.G.signatures["serving_default"]
 
     def inference(self, in_path, out_path):

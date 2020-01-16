@@ -3,8 +3,8 @@ import base64
 from PIL import Image
 import re
 from io import BytesIO
-from matting_model import DeepLab_Matting
-from transfer_model import CartoonGAN
+from .matting_model import DeepLab_Matting
+from .transfer_model import CartoonGAN
 
 def base64_to_image(base64_str):
     # read image from a base64 str
@@ -16,7 +16,7 @@ def base64_to_image(base64_str):
 
 class ImgLoader(object):
     def __init__(self, matting_path, transfer_path):
-        self.M = DeepLab_Matting(matting_model)
+        self.M = DeepLab_Matting(matting_path)
         self.G = CartoonGAN(transfer_path)
 
     def save_image(self, base64_str, path):
