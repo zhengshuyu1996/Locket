@@ -8,6 +8,7 @@ class CartoonGAN(object):
     def __init__(self, path):
         self.G = tf.saved_model.load(path)
         self.f = self.G.signatures["serving_default"]
+        print('Transfer model loaded successfully!')
 
     def inference(self, in_path, out_path):
         print("generating image from %s"%in_path)

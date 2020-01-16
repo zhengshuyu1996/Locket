@@ -47,7 +47,7 @@ class DeepLabModel(object):
 class DeepLab_Matting(object):
     def __init__(self, path):
         self.MODEL = DeepLabModel(path)
-        print('model loaded successfully!')
+        print('Matting model loaded successfully!')
 
     def run(self, path):
         img = Image.open(path)

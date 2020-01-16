@@ -48,9 +48,12 @@ def step():
                 img_loader.transfer(matting_path, transfer_path)
 
                 return make_response(jsonify({
-                    'original': original_path,
-                    'matting': matting_path,
-                    'transfer': transfer_path
+                        'status': 'ok',
+                        'data': {
+                            'original': original_path,
+                            'matting': matting_path,
+                            'transfer': transfer_path
+                        }
                     }))
             except Exception as e:
                 handleException(e)

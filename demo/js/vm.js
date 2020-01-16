@@ -2,7 +2,7 @@ var vm = new Vue({
     el: "#app",
     data: {
         mode: 'welcome',
-        show_path: false,
+        loading: true,
         base_url: 'http://35.189.165.204:80/',
         up_image: null,
         imgData: {
@@ -36,28 +36,28 @@ var vm = new Vue({
                 return false;
             }
 
+            let that = this
             reader.readAsDataURL(img1)
             reader.onload = e => {
                 let imgFile = e.target.result;
                 let upload_data = {}
                 upload_data.image = imgFile
                 upload_data.timestamp = new Date().getTime()
+                that.loading = true
                 $.ajax({
-                    url: this.base_url + 'upload',
+                    url: that.base_url + 'upload',
                     type: 'POST', 
                     dataType: "json",
                     contentType: "application/json",
                     data: JSON.stringify(upload_data),
                     success: function(res) {
                         console.log('success', res.data)
-                        this.result_path = res.data
-                        this.mode = 'result'
-                        // that.loading = false
-                        // that.ai_step = res.data
-                        // that.moveAI(res.data)
+                        that.result_path = res.data
+                        that.mode = 'result'
+                        that.loading = false
                     },
                     error: function(err) {
-                        // that.loading = false
+                        that.loading = false
                         Materialize.toast("Sorry! An error occurs!", 3000)
                         console.log('ajax err', err)
                     }

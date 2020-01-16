@@ -50,6 +50,17 @@
                 </button> -->
             </div>
         </div>
+        <transition name="pause">
+            <div v-if="loading" class="pause-cover valign-wrapper" @click="">
+                <div class="menu-center valign">
+                    <h5><i class="fa fa-spinner fa-spin"></i></h5>
+                    <h5>transfering your image</h5>
+                    <!-- <button class="btn waves-effect waves-light" @click="">restart</button> -->
+                    <!-- <button class="btn waves-effect waves-light" @click="showHelp">help</button>
+                    <button class="btn waves-effect waves-light" @click="closeSetting">continue</button> -->
+                </div>
+            </div>
+        </transition>
     </div>
     <script type='text/javascript' src='js/vue.min.js'></script>
     <script type="text/javascript" src="js/vm.js"></script>
