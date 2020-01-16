@@ -99,34 +99,46 @@ body {
 
 .painting-bg {
     background-image: url('../img/frame.png');
-    width: 320px;
-    height: 387px;
+    /*width: 320px;
+    height: 387px;*/
+    width: 90vw;
+    height: 106vw;
     position: relative;
     text-align: left;
 }
 
 .painting-img {
-    width: 170px;
-    height: 230px;
+/*    width: 170px;
+    height: 230px;*/
+    width: 47vw;
+    height: 64.5vw;
     margin-left: auto;
     margin-right: auto;
     object-fit: cover;
     position: absolute;
-    top: 128px;
+    /*top: 128px;
     left: 75px;
-    border-radius: 87px;
+    border-radius: 87px;*/
+    top: 36vw;
+    left: 21vw;
+    border-radius: 24.5vw;
 }
 
 .drawing-bg {
     background-image: url('../img/paper.png');
-    width: 300px;
-    height: 333px;
+    /*width: 300px;
+    height: 333px;*/
+    width: 90vw;
+    height: 100vw;
 }
 
 .drawing-img {
-    margin-top: -30px;
+    /*margin-top: -30px;
     width: 200px;
-    height: 200px;
+    height: 200px;*/
+    margin-top: -9vw;
+    width: 60vw;
+    height: 60vw;
     margin-left: auto;
     margin-right: auto;
     object-fit: cover;
@@ -134,21 +146,27 @@ body {
 
 .simpson-bg {
     background-image: url('../img/tv.png');
-    width: 300px;
-    height: 353px;
+    /*width: 300px;
+    height: 353px;*/
+    width: 90vw;
+    height: 106vw;
     position: relative;
     text-align: left;
 }
 
 .simpson-img {
-    width: 178px;
-    height: 142px;
+    /*width: 178px;
+    height: 142px;*/
+    width: 53.4vw;
+    height: 42.6vw;
     margin-left: auto;
     margin-right: auto;
     object-fit: cover;
     position: absolute;
-    top: 140px;
-    left: 48px;
+    /*top: 140px;
+    left: 48px;*/
+    top: 42vw;
+    left: 14.4vw;
 }
 
 @media (min-width: 900px) {
