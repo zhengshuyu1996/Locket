@@ -74,11 +74,93 @@ body {
     left: 15px;
 }
 
-.score-board {
-    width: 500px;
+.back-btn a:nth-child(2) {
+    margin-left: 10px;
+}
+
+.choice-btn {
+    display: block;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-container {
+    width: 100%;
+    text-align: center;
+}
+
+.image-frame {
+    background-size: 100% 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.painting-bg {
+    background-image: url('../img/frame.png');
+    width: 320px;
+    height: 387px;
+    position: relative;
+    text-align: left;
+}
+
+.painting-img {
+    width: 170px;
+    height: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
     position: absolute;
-    left: 50%;
-    margin-left: -250px;
+    top: 128px;
+    left: 75px;
+    border-radius: 87px;
+}
+
+.drawing-bg {
+    background-image: url('../img/paper.png');
+    width: 300px;
+    height: 333px;
+}
+
+.drawing-img {
+    margin-top: -30px;
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+}
+
+.simpson-bg {
+    background-image: url('../img/tv.png');
+    width: 300px;
+    height: 353px;
+    position: relative;
+    text-align: left;
+}
+
+.simpson-img {
+    width: 178px;
+    height: 142px;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    position: absolute;
+    top: 140px;
+    left: 48px;
+}
+
+.citition {
+    margin-top: 10px;
+}
+
+.attribution {
+    position: fixed;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .menu {
@@ -96,10 +178,11 @@ body {
     margin-left: -150px;
 }
 
-.menu-center h5 {
+.info {
     font-weight: 200;
     font-style: italic;
     margin-top: 40px;
+    margin-bottom: 15px;
 }
 
 .opponent {
@@ -191,43 +274,5 @@ body {
     align-items: center;
   }
 
-
-.noble-list-complete-item {
-  transition: all 1s;
-}
-.noble-list-complete-enter, .noble-list-complete-leave-to
-/* .list-complete-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.noble-list-complete-leave-active {
-  position: absolute;
-}
-
-.list-complete-item {
-  transition: all 1s;
-/*  display: inline-block;
-  margin-right: 10px;*/
-}
-/*.list-enter
-  opacity: 0;
-  transform: translateX(30px);
-}*/
-
-.list-enter-active, .list-leave-active {
-  transition: all 1s;
-}
-.list-enter, .list-leave-to
-/* .list-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
 
 

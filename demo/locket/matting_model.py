@@ -2,6 +2,7 @@ import os
 import numpy as np
 from PIL import Image
 import tensorflow as tf
+import datetime
 
 class DeepLabModel(object):
     INPUT_TENSOR_NAME = 'ImageTensor:0'
@@ -47,10 +48,9 @@ class DeepLabModel(object):
 class DeepLab_Matting(object):
     def __init__(self, path):
         self.MODEL = DeepLabModel(path)
-        print('Matting model loaded successfully!')
+        print('Matting model loaded successfully!', )
 
     def run(self, in_path, out_path):
-        print("generating image from %s"%in_path)
         img = Image.open(in_path)
         
         resized_im, seg_map = self.MODEL.run(img)
@@ -61,7 +61,6 @@ class DeepLab_Matting(object):
         res_img = Image.fromarray(res_arr, mode='RGBA')
         res_img.save(out_path, 'PNG')
         
-        print("generated image saved to %s"%out_path)
         return res_arr
 
 
