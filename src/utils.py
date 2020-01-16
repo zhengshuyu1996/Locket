@@ -1,9 +1,11 @@
 import scipy.misc
 from glob import glob
 import numpy as np
+from PIL import Image
 
 def imread(path):
-    return scipy.misc.imread(path, mode='RGB').astype(np.float)
+    return np.array(Image.open(path).convert("RGB")).astype(np.float)
+    # return scipy.misc.imread(path, mode='RGB').astype(np.float)
 
 def load_img(path, w=128, h=128):
     img = imread(path)

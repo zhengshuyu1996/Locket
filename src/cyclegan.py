@@ -15,6 +15,7 @@ import sys
 import numpy as np
 from utils import DataLoader
 import tensorflow as tf 
+from imageio import imwrite
 
 class Config():
     def __init__(self):
