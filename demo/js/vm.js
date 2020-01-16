@@ -2,7 +2,7 @@ var vm = new Vue({
     el: "#app",
     data: {
         mode: 'welcome',
-        loading: true,
+        loading: false,
         base_url: 'http://35.189.165.204:80/',
         up_image: null,
         imgData: {

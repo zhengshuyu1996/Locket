@@ -14,7 +14,9 @@ class CartoonGAN(object):
         print("generating image from %s"%in_path)
         img = np.array(Image.open(in_path).convert("RGB"))
         img = np.expand_dims(img, 0).astype(np.float32) / 127.5 - 1
+        
         out = self.f(tf.constant(img))['output_1']
+        
         out = ((out.numpy().squeeze() + 1) * 127.5).astype(np.uint8)
         imwrite(out_path, out)
         print("generated image saved to %s"%out_path)

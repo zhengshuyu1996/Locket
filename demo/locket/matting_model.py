@@ -49,12 +49,19 @@ class DeepLab_Matting(object):
         self.MODEL = DeepLabModel(path)
         print('Matting model loaded successfully!')
 
-    def run(self, path):
-        img = Image.open(path)
+    def run(self, in_path, out_path):
+        print("generating image from %s"%in_path)
+        img = Image.open(in_path)
+        
         resized_im, seg_map = self.MODEL.run(img)
         seg_map[seg_map==1] = 255
         img_arr = np.array(resized_im)
         res_arr = np.concatenate((img_arr, np.expand_dims(seg_map, -1)), -1).astype(np.uint8)        
+        
+        res_img = Image.fromarray(res_arr, mode='RGBA')
+        res_img.save(out_path, 'PNG')
+        
+        print("generated image saved to %s"%out_path)
         return res_arr
 
 

@@ -1,8 +1,6 @@
 from __future__ import print_function, division
-import scipy
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-os.environ['PYTHONHASHSEED'] = '0'
 
 from tensorflow.keras.layers import Input, Dense, Reshape, Flatten, Dropout, Concatenate
 from tensorflow.keras.layers import BatchNormalization, Activation, ZeroPadding2D
