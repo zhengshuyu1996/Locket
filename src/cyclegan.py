@@ -97,7 +97,7 @@ class CycleGAN():
                                             self.lambda_id, self.lambda_id ],
                             optimizer=optimizer)
         
-        self.build_summary()
+        # self.build_summary()
         print('End building CycleGAN...')
 
     def build_generator(self):
