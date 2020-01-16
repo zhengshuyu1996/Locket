@@ -105,12 +105,12 @@ var vm = new Vue({
                     timestamp: this.timestamp,
                     trans_type: this.transfer_type
                 })
-            this.loading = true
-            setTimeout(function(){
-                that.loading = false
-                that.mode = 'result'
-            }, 5000)
-            return 
+            // this.loading = true
+            // setTimeout(function(){
+            //     that.loading = false
+            //     that.mode = 'result'
+            // }, 5000)
+            // return 
             this.loading = true
             $.ajax({
                 url: this.base_url + 'upload',
