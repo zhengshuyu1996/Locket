@@ -19,9 +19,9 @@ app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
 img_loader = img_loader.ImgLoader(
     '../models/model.pb', 
-    '../models/SavedModelLight_0000', 
-    '../models/', 
-    '../models/')
+    '../models/SavedModelLight_sketch', 
+    '../models/SavedModelLight_painting', 
+    '../models/SavedModelLight_simpson')
 
 def handleException(e):
     print ('str(e):\t\t', str(e))
