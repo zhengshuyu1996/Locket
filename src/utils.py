@@ -34,12 +34,14 @@ class DataLoader():
         for img_path in paths:
             img = imread(img_path)
             if not self.is_testing:
-                img = scipy.misc.imresize(img, self.img_res)
+                img = np.array(Image.fromarray(img).resize(self.img_res))
+                # img = scipy.misc.imresize(img, self.img_res)
 
                 if np.random.random() > 0.5:
                     img = np.fliplr(img)
             else:
-                img = scipy.misc.imresize(img, self.img_res)
+                img = np.array(Image.fromarray(img).resize(self.img_res))
+                # img = scipy.misc.imresize(img, self.img_res)
             imgs.append(img)
 
         imgs = np.array(imgs)/127.5 - 1.

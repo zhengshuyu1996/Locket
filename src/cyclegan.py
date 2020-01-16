@@ -314,7 +314,7 @@ if __name__ == '__main__':
     # Configure data loader
     dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/painting/'
     dir_B = '../datasets/matting_samples/clip/'
-    AB_train = DataLoader(dir_A, dir_B, img_res=(256,256))
+    # AB_train = DataLoader(dir_A, dir_B, img_res=(256,256))
     AB_val = DataLoader(dir_A, dir_B, is_testing=True, img_res=(256,256))
     sample_num = 50
     A_sample = AB_val.get_dataset_A(sample_num)
