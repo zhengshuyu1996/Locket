@@ -3,7 +3,7 @@
 
 from flask import Flask, render_template, url_for, request, redirect, make_response, session, jsonify, json, send_from_directory
 import os, time
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import sys  
 import traceback
 import json
@@ -13,6 +13,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 app = Flask(__name__, static_url_path='', static_folder='')
 app.debug = True
+app.debug = False
 app.config['UPLOAD_FOLDER'] = 'data/'
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
@@ -59,7 +60,7 @@ def step():
 
 
 if __name__ == '__main__':
-    # ip = '0.0.0.0'
-    # app.run(host=ip, port=80)
-    app.run(port=9090)
+    ip = '0.0.0.0'
+    app.run(host=ip, port=80)
+    # app.run(port=9090)
 
