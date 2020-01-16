@@ -21,7 +21,8 @@ class CartoonGAN(object):
         elif self.trans_type == 'painting':
             img = preprocess_for_painting(img)
 
-        img = np.array(img)
+        img = np.array(img.convert("RGB"))
+        print(img.shape)
         img = np.expand_dims(img, 0).astype(np.float32) / 127.5 - 1
         
         out = self.f(tf.constant(img))['output_1']
