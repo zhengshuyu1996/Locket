@@ -18,23 +18,24 @@ var vm = new Vue({
             matting: 'data/1579146068210_matting.png',
             transfer: 'data/1579146068210_transfer.png'
         },
-        style_imgs: {
-            painting: ['img/painting/0048.jpg', 'img/painting/0052.jpg', 'img/painting/0053.jpg', 'img/painting/2167.jpg', 'img/painting/2143.jpg'],
-            drawing: ['img/drawing/download (3).jpeg', 'img/drawing/download (1).jpeg', 'img/drawing/i - 55.jpeg', 'img/drawing/i - 192.jpeg', 'img/drawing/i - 160.jpeg'],
-            simpson: ['img/simpson/pic_0001.jpg', 'img/simpson/pic_0003.jpg', 'img/simpson/pic_0005.jpg', 'img/simpson/pic_0008.jpg', 'img/simpson/pic_0009.jpg']
-        },
         dataset: {
             painting: {
-                name: 'Art Images: Painting',
-                cite: 'https://www.kaggle.com/thedownhill/art-images-drawings-painting-sculpture-engraving'
+                name: 'Art Images - Painting',
+                cite: 'https://www.kaggle.com/thedownhill/art-images-drawings-painting-sculpture-engraving',
+                style_imgs:  ['img/painting/0048.jpg', 'img/painting/0052.jpg', 'img/painting/0053.jpg', 'img/painting/2167.jpg', 'img/painting/2143.jpg'],
+                quotes: '"You don\'t take a photograph, you make it"'
             },
             drawing: {
-                name: 'Art Images: Drawing',
-                cite: 'https://www.kaggle.com/thedownhill/art-images-drawings-painting-sculpture-engraving'
+                name: 'Art Images - Drawing',
+                cite: 'https://www.kaggle.com/thedownhill/art-images-drawings-painting-sculpture-engraving',
+                style_imgs: ['img/drawing/download (3).jpeg', 'img/drawing/download (1).jpeg', 'img/drawing/i - 55.jpeg', 'img/drawing/i - 192.jpeg', 'img/drawing/i - 160.jpeg'],
+                quotes: '"A picture is a poem without words"'
             },
             simpson: {
                 name: 'Simpson Faces',
-                cite: 'https://www.kaggle.com/alexattia/the-simpsons-characters-dataset'
+                cite: 'https://www.kaggle.com/alexattia/the-simpsons-characters-dataset',
+                style_imgs: ['img/simpson/pic_0001.jpg', 'img/simpson/pic_0003.jpg', 'img/simpson/pic_0005.jpg', 'img/simpson/pic_0008.jpg', 'img/simpson/pic_0009.jpg'],
+                quotes: '"Woo Hoo!"'
             }
         }
     },
@@ -104,12 +105,12 @@ var vm = new Vue({
                     timestamp: this.timestamp,
                     trans_type: this.transfer_type
                 })
-            // this.loading = true
-            // setTimeout(function(){
-            //     that.loading = false
-            //     that.mode = 'result'
-            // }, 5000)
-            // return 
+            this.loading = true
+            setTimeout(function(){
+                that.loading = false
+                that.mode = 'result'
+            }, 5000)
+            return 
             this.loading = true
             $.ajax({
                 url: this.base_url + 'upload',

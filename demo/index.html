@@ -23,13 +23,15 @@
         <div v-if="mode == 'welcome'" class="bg-blue valign-wrapper menu">
             <div class="valign menu-center orange-text text-lighten-5">
                 <img src="img/locket.png" width="200px" height="200px" />
-                <h4>Locket: 肖像画师</h4>
-                <h5 class="info">上传自拍，开始画像</h5>
+                <h4>Portrait MASTER</h4>
+                <h5 class="subtitle">human portrait MAtting and STyle TransfER</h5>
+                <p class="upload-info">UPLOAD YOUR SELFIE</p>
                 <button class="waves-effect waves-light btn light-green">
                     <i class="fa fa-play">
                         <input id="upfile" class="fill-parent invisible" type="file" name="upfile" @change='addImg'/>
                     </i>
                 </button>
+
             </div>
         </div>
         <div v-if="mode == 'choice'" class="bg-blue valign-wrapper menu">
@@ -62,7 +64,7 @@
                     </div>
                 </transition>
                 <div>
-                    <h5 class="info grey-text text-darken-4">"Woo Hoo!"</h5>
+                    <h5 class="info grey-text text-darken-4">{{dataset[transfer_type].quotes}}</h5>
                 </div>
                 <div>
                     <a @click="mode='style'" class="clickable">See style images</a>
@@ -83,10 +85,10 @@
             </div>
         </div>
         <div v-show="mode == 'style'" class="indigo lighten-4 valign-wrapper menu">
-            <div class="valign menu-center orange-text text-lighten-5">
+            <div class="valign dataset orange-text text-lighten-5">
                 <div class="slider">
                     <ul class="slides">
-                      <li v-for="(img, i) in style_imgs[transfer_type]" :key="i">
+                      <li v-for="(img, i) in dataset[transfer_type].style_imgs" :key="i">
                         <img :src="img"/>
                         <p>{{img}}</p>
                       </li>
@@ -100,8 +102,8 @@
                 </a>
             </div>
         </div>
-        <transition name="pause">
-            <div v-if="loading" class="pause-cover valign-wrapper" @click="">
+        <transition name="loading">
+            <div v-if="loading" class="loading-cover valign-wrapper" @click="">
                 <div class="menu-center valign">
                     <h5><i class="fa fa-spinner fa-spin"></i></h5>
                     <h5>Transfering Your Image</h5>

@@ -172,10 +172,16 @@ body {
 }
 
 .menu-center {
-    width: 300px;
-    position: absolute;
-    left: 50%;
-    margin-left: -150px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dataset {
+    width: 80%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .info {
@@ -185,66 +191,19 @@ body {
     margin-bottom: 15px;
 }
 
-.opponent {
-    width: 250px;
-    height: calc(100vh - 130px);
-    position: fixed;
-    left: 0;
-    top: 0;
-}
-
-.waiting-ai {
-    margin-left: 10px;
-    font-size: 16px; 
-    font-weight: 200; 
+.subtitle {
+    font-weight: 200;
     font-style: italic;
+    margin-top: 10px;
 }
 
-.player {
-    height: 160px;
-    width: 160px;
-    border-radius: 0 50px 50px 0;
-    margin: 20px 0;
-    position: relative;
-    padding: 10px 10px 10px 0;
+.upload-info {
+    font-weight: 200;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 
-.player:hover {
-    width: 170px;
-}
-
-.operation {
-    width: 200px;
-    height: calc(100vh - 130px);
-    position: fixed;
-    right: 0;
-    top: 0;
-}
-
-.operation .item {
-    width: 160px;
-    height: 50px;
-    border-radius: 50px 0 0 50px;
-    margin: 15px 0;
-}
-
-.operation .item:hover {
-    width: 170px;
-}
-
-.item-small {
-    width: 60px;
-    height: 50px;
-    border-radius: 50px 0 0 50px;
-    margin: 10px 0;
-}
-
-.item-small:hover {
-    width: 70px;
-}
-
-
-.pause-cover {
+.loading-cover {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -255,24 +214,16 @@ body {
     text-align: center;
 }
 
-.pause-enter-active, .pause-leave-active {
+.loading-enter-active, .loading-leave-active {
   transition: all .3s ease-in-out;
 }
 
-.pause-enter, .pause-leave-to
+.loading-enter, .loading-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
   transform: translateY(10px);
   opacity: 0;
 }
 
-
-.flex {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
 
 
