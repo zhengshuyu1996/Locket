@@ -34,6 +34,3 @@ class ImgLoader(object):
         if not os.path.exists(out_path):
             self.G.inference(in_path, out_path)
 
-
-img_loader = ImgLoader('../models/model.pb', '../models/SavedModelLight_0000')
-
