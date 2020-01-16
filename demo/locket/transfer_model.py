@@ -8,8 +8,8 @@ from .process_image import preprocess_for_sketch, preprocess_for_painting, postp
 class CartoonGAN(object):
     def __init__(self, path, trans_type):
         self.trans_type = trans_type
-        G = tf.saved_model.load(path)
-        self.f = G.signatures["serving_default"]
+        self.G = tf.saved_model.load(path)
+        self.f = self.G.signatures["serving_default"]
 
         print('Transfer %s model loaded successfully!'%trans_type)
 
