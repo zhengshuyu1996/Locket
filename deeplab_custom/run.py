@@ -96,8 +96,8 @@ class DeepLabModel(object):
         self.graph = tf.Graph()
 
         graph_def = None
-        with tf.gfile.GFile(path, 'rb')as file_handle:
-            graph_def = tf.GraphDef.FromString(file_handle.read())
+        with tf.io.gfile.GFile(path, 'rb')as file_handle:
+            graph_def = tf.compat.v1.GraphDef.FromString(file_handle.read())
 
         if graph_def is None:
             raise RuntimeError('Cannot find inference graph in tar archive.')
@@ -105,7 +105,7 @@ class DeepLabModel(object):
         with self.graph.as_default():
             tf.import_graph_def(graph_def, name='')
 
-        self.sess = tf.Session(graph=self.graph)
+        self.sess = tf.compat.v1.Session(graph=self.graph)
 
     def run(self, image):
         """Runs inference on a single image.
