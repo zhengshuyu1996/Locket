@@ -8,7 +8,7 @@ import sys
 import traceback
 import json
 # from img_loader import img_loader
-from locket import ImgLoader
+from locket import img_loader
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -18,7 +18,7 @@ app.debug = False
 app.config['UPLOAD_FOLDER'] = 'data/'
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
-img_loader = ImgLoader('../models/model.pb', '../models/SavedModelLight_0000')
+img_loader = img_loader.ImgLoader('../models/model.pb', '../models/SavedModelLight_0000')
 
 def handleException(e):
     print ('str(e):\t\t', str(e))
