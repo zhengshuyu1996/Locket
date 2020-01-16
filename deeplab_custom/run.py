@@ -10,81 +10,8 @@ import numpy as np
 from PIL import Image
 
 import tensorflow as tf
-
-# def create_pascal_label_colormap():
-#     colormap = np.zeros((256, 3), dtype=int)
-#     ind = np.arange(256, dtype=int)
-
-#     for shift in reversed(range(8)):
-#         for channel in range(3):
-#             colormap[:, channel] |= ((ind >> channel) & 1) << shift
-#         ind >>= 3
-
-#     return colormap
-
-# def label_to_color_image(label):
-#     """Adds color defined by the dataset colormap to the label.
-
-#     Args:
-#         label: A 2D array with integer type, storing the segmentation label.
-
-#     Returns:
-#         result: A 2D array with floating type. The element of the array
-#         is the color indexed by the corresponding element in the input label
-#         to the PASCAL color map.
-
-#     Raises:
-#         ValueError: If label is not of rank 2 or its value is larger than color
-#         map maximum entry.
-#     """
-#     if label.ndim != 2:
-#         raise ValueError('Expect 2-D input label')
-
-#     colormap = create_pascal_label_colormap()
-
-#     if np.max(label) >= len(colormap):
-#         raise ValueError('label value too large.')
-
-#     return colormap[label]
-
-# def vis_segmentation(image, seg_map, FULL_COLOR_MAP):
-#     """Visualizes input image, segmentation map and overlay view."""
-#     plt.figure(figsize=(15, 5))
-#     grid_spec = gridspec.GridSpec(1, 4, width_ratios=[6, 6, 6, 1])
-
-#     plt.subplot(grid_spec[0])
-#     plt.imshow(image)
-#     plt.axis('off')
-#     plt.title('input image')
-
-#     plt.subplot(grid_spec[1])
-#     seg_image = label_to_color_image(seg_map).astype(np.uint8)
-#     plt.imshow(seg_image)
-#     plt.axis('off')
-#     plt.title('segmentation map')
-
-#     plt.subplot(grid_spec[2])
-#     plt.imshow(image)
-#     plt.imshow(seg_image, alpha=0.7)
-#     plt.axis('off')
-#     plt.title('segmentation overlay')
-
-#     unique_labels = np.unique(seg_map)
-#     ax = plt.subplot(grid_spec[3])
-#     plt.imshow(
-#         FULL_COLOR_MAP[unique_labels].astype(np.uint8), interpolation='nearest')
-#     ax.yaxis.tick_right()
-#     plt.yticks(range(len(unique_labels)), LABEL_NAMES[unique_labels])
-#     plt.xticks([], [])
-#     ax.tick_params(width=0.0)
-#     plt.grid('off')
-#     plt.savefig('/home/celbree/MattingHuman/deeplab_custom/dataset/result.jpg')
-
-# LABEL_NAMES = np.asarray([
-#     'background', 'person', 'none'
-# ])
-# FULL_LABEL_MAP = np.arange(len(LABEL_NAMES)).reshape(len(LABEL_NAMES), 1)
-# FULL_COLOR_MAP = label_to_color_image(FULL_LABEL_MAP)
+import shutil
+import time
 
 class DeepLabModel(object):
     INPUT_TENSOR_NAME = 'ImageTensor:0'
@@ -105,7 +32,9 @@ class DeepLabModel(object):
         with self.graph.as_default():
             tf.import_graph_def(graph_def, name='')
 
-        self.sess = tf.compat.v1.Session(graph=self.graph)
+        config = tf.compat.v1.ConfigProto()
+        config.gpu_options.allow_growth = True
+        self.sess = tf.compat.v1.Session(config=config, graph=self.graph)
 
     def run(self, image):
         """Runs inference on a single image.
@@ -132,7 +61,7 @@ class DeepLab_Matting(object):
         self.MODEL = DeepLabModel(path)
         print('model loaded successfully!')
 
-    def run(self, path, save=False):
+    def run(self, path, save=False, save_path=None):
         img = Image.open(path)
         resized_im, seg_map = self.MODEL.run(img)
         seg_map[seg_map==1] = 255
@@ -141,11 +70,25 @@ class DeepLab_Matting(object):
         
         if save:
             res_img = Image.fromarray(res_arr, mode='RGBA')
-            res_img.save('/home/celbree/MattingHuman/deeplab_custom/dataset/matting.png', 'PNG')
+            res_img.save(save_path, 'PNG')
         
+        print('Done!')
         return res_arr
+        
 
 
 if __name__ == "__main__":
     matting = DeepLab_Matting('/home/celbree/MattingHuman/deeplab_custom/exp/save/model.pb')
-    res = matting.run('/home/celbree/MattingHuman/deeplab_custom/dataset/test.jpg', save=True)
+    data_path = '/home/celbree/MattingHuman/aisegmentcom-matting-human-datasets'
+    files = open('/home/celbree/MattingHuman/aisegmentcom-matting-human-datasets/sets/val.txt').readlines()[-20:]
+    res_path = '/home/celbree/MattingHuman/deeplab_custom/outputs'
+    if not os.path.exists(res_path):
+        os.mkdir(res_path)
+    cnt = 0
+    for file in files:
+        file = file.strip()
+        cnt += 1
+        shutil.copy2(os.path.join(data_path, 'images', file+'.jpg'), os.path.join(res_path, str(cnt).zfill(3)+'.jpg'))
+        shutil.copy2(os.path.join(data_path, 'mattings', file+'.png'), os.path.join(res_path, str(cnt).zfill(3)+'mat.png'))
+        res = matting.run(os.path.join(data_path, 'images', file+'.jpg'), True, os.path.join(res_path, str(cnt).zfill(3)+'.png'))
+
