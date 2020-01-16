@@ -19,7 +19,7 @@ class ImgLoader(object):
         self.M = DeepLab_Matting(matting_path)
         self.G_drawing = CartoonGAN(path_drawing, trans_type='drawing')
         self.G_painting = CartoonGAN(path_painting, trans_type='painting')
-        # self.G_simpson = CartoonGAN(path_simpson, trans_type='simpson')
+        self.G_simpson = CartoonGAN(path_simpson, trans_type='simpson')
 
     def save_image(self, base64_str, path):
         if not os.path.exists(path):
