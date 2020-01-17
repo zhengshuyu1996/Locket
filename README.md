@@ -9,3 +9,5 @@ We propose Portrait MaSter(Human Portrait Matting and Style Transfer). It’s a 
 
 * Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation[[code]](https://github.com/tensorflow/models/tree/master/research/deeplab)
 * Deep Automatic Portrait Matting[[code]](https://github.com/Corea/automatic-portrait-tf)
+* Unpaired image-to-image translation using cycle-consistent adversarial networks[[code]](https://github.com/vanhuyz/CycleGAN-TensorFlow)
+* Cartoongan: Generative adversarial networks for photo cartoonization[[code]](https://github.com/mnicnc404/CartoonGan-tensorflow)
