@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Locker</title>
+    <title>Portrait MaSter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="evol calculator">
     <meta name="keywords" content="calculator">
@@ -86,13 +86,17 @@
         </div>
         <div v-show="mode == 'style'" class="indigo lighten-4 valign-wrapper menu">
             <div class="valign dataset orange-text text-lighten-5">
-                <div class="slider">
-                    <ul class="slides">
-                      <li v-for="(img, i) in dataset[transfer_type].style_imgs" :key="i">
-                        <img :src="img"/>
-                        <p>{{img}}</p>
-                      </li>
-                    </ul>
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="slider">
+                            <ul class="slides">
+                              <li v-for="(img, i) in dataset[transfer_type].style_imgs" :key="i">
+                                <img :src="img"/>
+                                <p>{{img}}</p>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <p class="citition grey-text text-darken-2">Dataset: {{dataset[transfer_type].name}}<br/> ({{dataset[transfer_type].cite}})</p>
             </div>

@@ -1,7 +1,7 @@
 var vm = new Vue({
     el: "#app",
     data: {
-        mode: 'result',
+        mode: 'welcome',
         loading: false,
         base_url: 'http://35.189.165.204:80/',
         up_image: null,
