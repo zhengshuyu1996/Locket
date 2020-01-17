@@ -22,7 +22,7 @@ var vm = new Vue({
             painting: {
                 name: 'Art Images - Painting',
                 cite: 'https://www.kaggle.com/thedownhill/art-images-drawings-painting-sculpture-engraving',
-                style_imgs:  ['img/painting/0048.jpg', 'img/painting/0052.jpg', 'img/painting/0053.jpg', 'img/painting/2167.jpg', 'img/painting/2143.jpg'],
+                style_imgs:  ['img/painting/0048.jpg', 'img/painting/2139.jpg', 'img/painting/0053.jpg', 'img/painting/2167.jpg', 'img/painting/2016.jpg'],
                 quotes: '"You don\'t take a photograph, you make it"'
             },
             drawing: {
