@@ -7,5 +7,5 @@ We propose Portrait MaSter(Human Portrait Matting and Style Transfer). It’s a 
 
 ## Citation
 
-*Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation[[code]](https://github.com/tensorflow/models/tree/master/research/deeplab)
-*Deep Automatic Portrait Matting[[code]](https://github.com/Corea/automatic-portrait-tf)
+* Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation[[code]](https://github.com/tensorflow/models/tree/master/research/deeplab)
+* Deep Automatic Portrait Matting[[code]](https://github.com/Corea/automatic-portrait-tf)
