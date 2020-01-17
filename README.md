@@ -5,7 +5,7 @@ Today people are interested in making their selfie more artistic. Accordingly po
 
 We propose Portrait MaSter(Human Portrait Matting and Style Transfer). It’s a tool that can extract portrait from an image and apply a style transfer according to user preferences.
 
-## Citation
+## Reference
 
 * Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation[[pdf]](https://eccv2018.org/openaccess/content_ECCV_2018/papers/Liang-Chieh_Chen_Encoder-Decoder_with_Atrous_ECCV_2018_paper.pdf)[[code]](https://github.com/tensorflow/models/tree/master/research/deeplab)
 * Fully Convolutional Networks for Semantic Segmentation[[pdf]](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf)[[code]](https://github.com/Corea/automatic-portrait-tf)
