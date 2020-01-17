@@ -308,20 +308,19 @@ class CycleGAN():
 if __name__ == '__main__':
     config = Config()
     gan = CycleGAN(config)
-    gan.load_models('../models/')
-    
+    # gan.load_models('../models/')
 
     # Configure data loader
     dir_A = '../datasets/art-images-drawings-painting-sculpture-engraving/dataset/dataset_updated/training_set/painting/'
     dir_B = '../datasets/matting_samples/clip/'
-    # AB_train = DataLoader(dir_A, dir_B, img_res=(256,256))
+    AB_train = DataLoader(dir_A, dir_B, img_res=(256,256))
     AB_val = DataLoader(dir_A, dir_B, is_testing=True, img_res=(256,256))
     sample_num = 50
     A_sample = AB_val.get_dataset_A(sample_num)
     B_sample = AB_val.get_dataset_B(sample_num)
 
-    gan.test(B_sample)
-    # gan.train(AB_train=AB_train, AB_val=(A_sample, B_sample), epochs=200, batch_size=8, sample_interval=5)
-    # gan.save_models('../models/')
+    # gan.test(B_sample)
+    gan.train(AB_train=AB_train, AB_val=(A_sample, B_sample), epochs=200, batch_size=8, sample_interval=5)
+    gan.save_models('../models/')
 
 
